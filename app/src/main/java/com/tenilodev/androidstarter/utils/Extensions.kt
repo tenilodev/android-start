@@ -24,6 +24,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.tenilodev.androidstarter.pojo.Resource
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*

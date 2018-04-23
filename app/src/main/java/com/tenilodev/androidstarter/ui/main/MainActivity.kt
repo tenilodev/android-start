@@ -8,8 +8,13 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.tenilodev.androidstarter.R
+import com.tenilodev.androidstarter.pojo.Resource
+import com.tenilodev.androidstarter.pojo.Status
 import com.tenilodev.androidstarter.ui.base.BaseActivity
+import com.tenilodev.androidstarter.utils.addOnResultListener
+import com.tenilodev.androidstarter.utils.displaySnakbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -31,6 +36,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val res = Resource.success("mantapkan")
+        res.ad
     }
 
     override fun onBackPressed() {
