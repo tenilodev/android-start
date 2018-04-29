@@ -7,17 +7,28 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.tenilodev.androidstarter.R
 import com.tenilodev.androidstarter.ui.base.BaseActivity
+import com.tenilodev.androidstarter.utils.TOAST
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import javax.inject.Inject
 
-class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener, MainView {
+
+
+
+    @Inject
+    lateinit var mainPresenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        mainPresenter.testExecute()
+        mainPresenter.attachView(this)
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -31,6 +42,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         nav_view.setNavigationItemSelectedListener(this)
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mainPresenter.detachView()
     }
 
     override fun onBackPressed() {
@@ -82,5 +98,20 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onSuccess(any: String) {
+        TOAST(any)
+    }
+
+    override fun onError(message: String?, throwable: Throwable?) {
+        if (message != null) {
+            TOAST(message)
+        }
+        throwable?.printStackTrace()
+    }
+
+    override fun onProgress(isProgress: Boolean) {
+        println("onproggress")
     }
 }

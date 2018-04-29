@@ -227,6 +227,10 @@ fun getClickableSpan(color: Int, action: (view: View) -> Unit): ClickableSpan {
     }
 }
 
+fun Activity.TOAST(message: String, duration: Int = Toast.LENGTH_SHORT){
+    Toast.makeText(this, message, duration).show()
+}
+
 /**
  * Extension method to be used as the body for functions that are not yet implemented, which will
  * display a [Toast] with the specified [message].
