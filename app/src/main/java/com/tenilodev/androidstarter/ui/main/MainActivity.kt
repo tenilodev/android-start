@@ -1,5 +1,6 @@
 package com.tenilodev.androidstarter.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -10,6 +11,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.tenilodev.androidstarter.R
 import com.tenilodev.androidstarter.ui.base.BaseActivity
+import com.tenilodev.androidstarter.ui.intro.AppIntroActivity
 import com.tenilodev.androidstarter.utils.TOAST
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -27,7 +29,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        mainPresenter.testExecute()
+        startActivity(Intent(this,AppIntroActivity::class.java))
+
         mainPresenter.attachView(this)
 
         fab.setOnClickListener { view ->
