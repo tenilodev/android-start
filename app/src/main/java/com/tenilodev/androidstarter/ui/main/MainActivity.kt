@@ -29,8 +29,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        startActivity(Intent(this,AppIntroActivity::class.java))
-
         mainPresenter.attachView(this)
 
         fab.setOnClickListener { view ->
@@ -45,11 +43,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         nav_view.setNavigationItemSelectedListener(this)
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mainPresenter.detachView()
     }
 
     override fun onBackPressed() {
@@ -104,14 +97,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     override fun onSuccess(any: String) {
-        TOAST(any)
+        println(any)
     }
 
-    override fun onError(message: String?, throwable: Throwable?) {
-        if (message != null) {
-            TOAST(message)
-        }
-        throwable?.printStackTrace()
+    override fun onError(throwable: Throwable) {
+        throwable.message?.let { TOAST(it) }
+        throwable.printStackTrace()
     }
 
     override fun onProgress(isProgress: Boolean) {
