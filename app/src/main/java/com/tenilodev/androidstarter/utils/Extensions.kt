@@ -349,7 +349,7 @@ fun SnapHelper.snapToPosition(recyclerView: RecyclerView, position: Int) {
     recyclerView.apply {
         val view = findViewHolderForAdapterPosition(position)?.itemView
         val snapPositions = view?.let {
-            calculateDistanceToFinalSnap(layoutManager, it)
+            layoutManager?.let { it1 -> calculateDistanceToFinalSnap(it1, it) }
         }
 
         snapPositions?.let { smoothScrollBy(it[0], it[1]) }
