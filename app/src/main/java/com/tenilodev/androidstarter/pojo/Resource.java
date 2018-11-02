@@ -48,8 +48,8 @@ public class Resource<T> {
         return new Resource<>(SUCCESS, data, null);
     }
 
-    public static <T> Resource<T> error(String msg, @Nullable T data, @Nullable Throwable err) {
-        return new Resource<>(ERROR, data, msg, err);
+    public static <T> Resource<T> error(Throwable err) {
+        return new Resource<>(ERROR, null, err.getMessage(), err);
     }
 
     public static <T> Resource<T> loading(@Nullable T data) {
